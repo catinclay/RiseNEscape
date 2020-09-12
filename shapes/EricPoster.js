@@ -1,0 +1,57 @@
+// Simple class example
+
+function EricPoster(player, posX, posY, imageManager, roomTag) {
+	this.roomTag = roomTag;
+	this.player = player;
+
+	this.isCollectedItem = false;
+	this.imageManager = imageManager;
+
+	this.imageWoG = imageManager.get("ECPwoGImage");
+	this.imageWithG = imageManager.get("ECPwithGImage");
+	this.image = this.imageWoG;
+	this.x = posX;
+	this.y = posY;
+	this.hasGuitar = false;
+}
+
+//The function below returns a Boolean value representing whether the point with the coordinates supplied "hits" the particle.
+EricPoster.prototype.hitTest = function(hitX,hitY) {
+	return this.isVisible() &&
+		((hitX > this.x - this.image.width / 2) && 
+		(hitX < this.x + this.image.width / 2) && 
+		(hitY > this.y - this.image.height / 2) && 
+		(hitY < this.y + this.image.height / 2));
+}
+
+EricPoster.prototype.isVisible = function() {
+	return this.player.currentRoomTag == this.roomTag && !this.isCollected;
+}
+
+EricPoster.prototype.interact = function(item) {
+	if (item.getItemTag() === "guitar" && !this.hasGuitar) {
+		this.hasGuitar = true;
+		this.image = this.imageWithG;
+		return true;
+	}
+	return false;
+}
+
+EricPoster.prototype.collect = function() {
+	return;
+}
+
+//A function for drawing the particle.
+EricPoster.prototype.drawToContext = function(theContext) {
+	if (!this.isVisible()) return;
+	theContext.save();
+	theContext.translate(this.x, this.y);
+  	theContext.drawImage(this.image, 
+  						-this.image.width / 2, 
+  						-this.image.height / 2);
+  	theContext.restore();
+}
+
+EricPoster.prototype.shouldDestroy = function(theContext) {
+	return false;
+}

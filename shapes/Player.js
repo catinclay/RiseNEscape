@@ -9,6 +9,8 @@ function Player(canvasWidth, canvasHeight) {
 
 	this.bombCountDownSecond = 1261440000;
 	this.fpsPassed = 0;
+	this.defaultTimeWarpCountdown = 75
+	this.timeWarpCountdown = 0;
 }
 
 
@@ -20,6 +22,10 @@ Player.prototype.hitTest = function(hitX,hitY) {
 		(hitX < this.canvasWidth));
 }
 
+Player.prototype.warpAnimation = function(theContext) {
+	this.timeWarpCountdown = this.defaultTimeWarpCountdown;
+}
+
 //A function for drawing the particle.
 Player.prototype.drawToContext = function(theContext) {
 	this.fpsPassed++;
@@ -27,9 +33,16 @@ Player.prototype.drawToContext = function(theContext) {
 		this.fpsPassed = 0;
 		this.bombCountDownSecond--;
 	}
+
 	theContext.fillStyle = "rgba(255, 0, 0, 0.3)";
 	theContext.fillRect(0, 0, this.directionBottonWidth, this.canvasHeight - 1/6*this.canvasHeight);
 	theContext.fillRect(this.canvasWidth - this.directionBottonWidth, 0, this.canvasWidth, this.canvasHeight - 1/6*this.canvasHeight);
+
+	if (this.timeWarpCountdown > 0) {
+		theContext.fillStyle = "rgba(255, 255, 255, " + this.timeWarpCountdown / this.defaultTimeWarpCountdown + ")";
+		this.timeWarpCountdown--;
+		theContext.fillRect(0, 0, this.canvasWidth, this.canvasHeight - 1/6*this.canvasHeight);		
+	}
 }
 
 Player.prototype.getMoveDirection = function(hitX, hitY) {

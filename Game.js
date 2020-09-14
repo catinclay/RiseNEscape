@@ -7,7 +7,7 @@ function Game(){}
 // - remove test code before upload
 
 // Option
-// - Song name locker hint: arrow
+// - sfx
 // - Hover hint image?
 // - SB holder hint
 // - item info
@@ -116,7 +116,7 @@ Game.prototype.initGame = function() {
 	this.drawables.push(this.particles);
 
 	// Test code
-	// this.player.currentRoomTag = "4";
+	this.player.currentRoomTag = "4";
 	// this.inventory.collect(new CocaineItem(this.imageManager, "cocaineItemImage"));
 	
 	// let bombItem = new BombItem(this.imageManager, "timeBombItemImage");

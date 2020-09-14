@@ -72,8 +72,10 @@ Gate.prototype.interact = function(item) {
 
 Gate.prototype.collect = function() {
 	if (this.clickOnGate && !this.isLastGate) {
+		this.player.warpAnimation();
 		this.player.currentRoomTag = this.toRoomTag;
 	} else if (this.clickOnGate && this.isLastGate) {
+		this.player.warpAnimation();
 		this.player.currentRoomTag = 99;
 		this.player.stopCocaineSong();
 	}

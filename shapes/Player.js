@@ -1,8 +1,11 @@
 // Simple class example
 
-function Player(canvasWidth, canvasHeight) {
+function Player(canvasWidth, canvasHeight, imageManager) {
 	this.canvasWidth = canvasWidth;
 	this.canvasHeight = canvasHeight;
+	this.imageManager = imageManager;
+	this.introImage = imageManager.get("introImage");
+
 	this.directionBottonWidth = this.canvasWidth/30;
 
 	this.currentRoomTag = "0";
@@ -11,6 +14,41 @@ function Player(canvasWidth, canvasHeight) {
 	this.fpsPassed = 0;
 	this.defaultTimeWarpCountdown = 75
 	this.timeWarpCountdown = 0;
+
+	this.defaultIntroCountdown = 2500;
+	this.introCountdown = this.defaultIntroCountdown;
+	this.introScripts = [
+	"This is a beautiful day", 
+	"Birds are singing",
+	"Flowers are blooming",
+	"",
+	"However",
+	"You found you're late ",
+	"for an important meeting",
+	"You wake up,",
+	"On the sofa",
+	"(since you slept on the sofa last night)",
+	"And you notice that",
+	"There is no door to exit",
+	"",
+	"'Uhh, that's not good..'",
+	"",
+	"You keep your confusing in your mind",
+	"Now the first thing to do",
+	"Is to figure out how to leave this place",
+	"So that you can catch up the important meeting",
+	"So that you won't get fired",
+	"So that you can keep earning money",
+	"So that you can pay the bill ",
+	"So that you don't have to beg on the street",
+	".",
+	".",
+	".",
+	"You don't want to beg on the street, right?",
+	".",
+	".",
+	"So now, Rise and Escape.....",
+	];
 }
 
 
@@ -26,8 +64,55 @@ Player.prototype.warpAnimation = function(theContext) {
 	this.timeWarpCountdown = this.defaultTimeWarpCountdown;
 }
 
+Player.prototype.skipIntro = function() {
+	if (this.introCountdown < this.defaultIntroCountdown - 150) {
+		this.introCountdown = 0;
+	}
+}
+
 //A function for drawing the particle.
 Player.prototype.drawToContext = function(theContext) {
+	if (this.introCountdown >= 0) {
+		this.introCountdown--;
+		theContext.fillStyle = "rgba(0, 0, 0, 1)";
+		theContext.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+		if (this.introCountdown < this.defaultIntroCountdown - 150) {
+			theContext.textAlign = "center";
+			theContext.font = "15px Comic Sans MS";
+			theContext.fillStyle = "rgba(255, 255, 255, 1)";	
+			theContext.fillText("click to skip", 800, 50)
+		}
+
+		theContext.textAlign = "center";
+		theContext.font = "40px Comic Sans MS";
+		theContext.fillStyle = "rgba(255, 255, 0, 1)";
+		let introTopMargin = this.canvasHeight + 50 + (this.introCountdown - this.defaultIntroCountdown);
+		let introGap = 60;
+		for (var i = this.introScripts.length - 1; i >= 0; i--) {
+			theContext.fillText(this.introScripts[i], 450, introTopMargin + i * introGap);
+		}
+		
+		// let image = this.introImage;
+		// var fetchHeight = 500;
+		// var width = image.width,
+  //           height = image.height;
+  //   	theContext.save();
+  //       for (var i = 0; i <= width / 2; ++i) {
+  //         	theContext.setTransform(1, 0,
+  //                -1 + 2 * (0.5 - i/height), 1, 0, -progress * (height - fetchHeight)); 
+  //         	theContext.drawImage(image,
+  //               width / 2-i, progress * (height - fetchHeight), 2, fetchHeight,
+  //               width / 2-i, progress * (height - fetchHeight), 2, fetchHeight);
+  //         	theContext.setTransform(1, 0,
+  //                 2 * i/height, 1, 0, - progress * (height - fetchHeight)); 
+  //         	theContext.drawImage(image,
+  //               width / 2+i, progress * (height - fetchHeight), 2, fetchHeight,
+  //               width / 2+i, progress * (height - fetchHeight), 2, fetchHeight);
+  //       }
+  //       theContext.restore();
+		return;
+	}
+
 	this.fpsPassed++;
 	if(this.fpsPassed >= 30) {
 		this.fpsPassed = 0;

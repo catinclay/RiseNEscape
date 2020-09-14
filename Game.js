@@ -1,6 +1,7 @@
 function Game(){}
 
 // TODO:
+// - Make Cocaine item
 // - Intro Scene
 // - Ending cut
 // - remove test code before upload
@@ -28,7 +29,7 @@ Game.prototype.initGame = function() {
 	this.uiHolder = [];
 
 	// Player.
-	this.player = new Player(this.canvasWidth, this.canvasHeight);
+	this.player = new Player(this.canvasWidth, this.canvasHeight, this.imageManager);
 	this.uiHolder.push(this.player);
 
 	// Backgrounds.
@@ -134,7 +135,10 @@ Game.prototype.getDrawables = function() {
 }
 
 Game.prototype.inputDownListener = function(touchX, touchY) {
-
+	if (this.player.introCountdown >= 0) {
+		this.player.skipIntro();
+		return;
+	}
 	if (this.inventory.hitTest(touchX, touchY)) {
 		this.inventory.select(touchX, touchY);
 		return;

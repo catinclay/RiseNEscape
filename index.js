@@ -52,7 +52,9 @@ var loadPromises = [
 	imageManager.registerImage({name:'brokenBoxWLImage', path: 'image/', src:'brokenBoxWL.png'}),
 	imageManager.registerImage({name:'brokenBoxWoLImage', path: 'image/', src:'brokenBoxWoL.png'}),
 	imageManager.registerImage({name:'letterItemImage', path: 'image/', src:'letterItem.png'}),
-];
+	imageManager.registerImage({name:'introImage', path: 'image/', src:'intro.png'}),
+	];
+	
 
 Promise.all(loadPromises).then(gameEngine.start());
 

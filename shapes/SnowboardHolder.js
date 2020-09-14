@@ -1,17 +1,17 @@
 // Simple class example
 
-function SnowboardHolder(player, posX, posY, imageManager, roomTag, itemsOnTheGround) {
+function SnowboardHolder(player, posX, posY, imageManager, roomTag) {
 	this.roomTag = roomTag;
 	this.player = player;
 
 	this.imageManager = imageManager;
 
-	this.itemsOnTheGround = itemsOnTheGround;
 	this.image = imageManager.get("sbholderImage");
 	this.x = posX;
 	this.y = posY;
 	this.hasSB = false;
 	this.sbTag = "";
+	this.isCleared = false;
 }
 
 //The function below returns a Boolean value representing whether the point with the coordinates supplied "hits" the particle.
@@ -23,8 +23,16 @@ SnowboardHolder.prototype.hitTest = function(hitX,hitY) {
 		(hitY < this.y + this.image.height / 2));
 }
 
+SnowboardHolder.prototype.applyGate = function(gate) {
+	this.gate = gate;
+}
+
+SnowboardHolder.prototype.clear = function() {
+	this.isCleared = true;
+}
+
 SnowboardHolder.prototype.isVisible = function() {
-	return this.player.currentRoomTag == this.roomTag;
+	return this.player.currentRoomTag == this.roomTag && !this.isCleared;
 }
 
 SnowboardHolder.prototype.putsb = function(sbImageName, sbtag) {
@@ -38,12 +46,14 @@ SnowboardHolder.prototype.interact = function(item) {
 		this.hasSB = true;
 		this.sbTag = item.getItemTag();
 		this.sbImage = this.imageManager.get("hangjumesbImage");
+		this.gate.checkAnswer();
 		return true;
 	}
 	if (item.getItemTag() === "011sb" && !this.hasSB) {
 		this.hasSB = true;
 		this.sbTag = item.getItemTag();
 		this.sbImage = this.imageManager.get("hang011sbImage");
+		this.gate.checkAnswer();
 		return true;
 	}
 
@@ -51,6 +61,7 @@ SnowboardHolder.prototype.interact = function(item) {
 		this.hasSB = true;
 		this.sbTag = item.getItemTag();
 		this.sbImage = this.imageManager.get("hangsdoasbImage");
+		this.gate.checkAnswer();
 		return true;
 	}
 	return false;
@@ -59,18 +70,21 @@ SnowboardHolder.prototype.interact = function(item) {
 SnowboardHolder.prototype.collect = function() {
 	if (this.hasSB) {
 		if (this.sbTag == "jumesb") {
+			this.sbTag = "";
 			this.hasSB = false;
 			this.sbImage = '';
 			return new SnowboardItem(this.imageManager, "jumesbItemImage", "jumesb");
 		}
 
 		if (this.sbTag == "011sb") {
+			this.sbTag = "";
 			this.hasSB = false;
 			this.sbImage = '';
 			return new SnowboardItem(this.imageManager, "011sbItemImage", "011sb");
 		}
 
 		if (this.sbTag == "sdoasb") {
+			this.sbTag = "";
 			this.hasSB = false;
 			this.sbImage = '';
 			return new SnowboardItem(this.imageManager, "sdoasbItemImage", "sdoasb");

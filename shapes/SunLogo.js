@@ -1,13 +1,15 @@
 // Simple class example
 
-function SunLogo(player, posX, posY, imageManager, roomTag) {
+function SunLogo(player, posX, posY, imageManager, roomTag, soundManager, ftvScreen) {
 	this.roomTag = roomTag;
 	this.player = player;
 
 	this.imageManager = imageManager;
+	this.soundManager = soundManager;
 
 	this.imageWoGoggle = imageManager.get("sunwoGoggleImage");
 	this.imageWithGoggle = imageManager.get("sunwithGoggleImage");
+	this.ftvScreen = ftvScreen;
 	this.image = this.imageWoGoggle;
 	this.x = posX;
 	this.y = posY;
@@ -31,6 +33,8 @@ SunLogo.prototype.interact = function(item) {
 	if (item.getItemTag() === "goggle" && !this.hasGoggle) {
 		this.hasGoggle = true;
 		this.image = this.imageWithGoggle;
+		this.soundManager.play("rnrGreeting");
+		this.ftvScreen.isRevealed = true;
 		return true;
 	}
 	return false;

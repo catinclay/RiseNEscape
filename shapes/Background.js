@@ -6,6 +6,10 @@ function Background(player, imageManager) {
 	this.backgroundImages["0"] = imageManager.get("bg-0");
 	this.backgroundImages["1"] = imageManager.get("bg-1");
 	this.backgroundImages["2"] = imageManager.get("bg-2");
+	this.backgroundImages["3"] = imageManager.get("bg-3");
+	this.backgroundImages["4"] = imageManager.get("bg-4");
+	this.backgroundImages["5"] = imageManager.get("bg-5");
+	this.backgroundImages["99"] = imageManager.get("bg-99");
 
 }
 

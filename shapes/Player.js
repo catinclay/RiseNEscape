@@ -5,7 +5,7 @@ function Player(canvasWidth, canvasHeight) {
 	this.canvasHeight = canvasHeight;
 	this.directionBottonWidth = this.canvasWidth/30;
 
-	this.currentRoomTag = "2";
+	this.currentRoomTag = "0";
 }
 
 
@@ -49,9 +49,26 @@ Player.prototype.move = function(direction) {
 		} else {
 			toRoom = "0";
 		}
+	} else if (this.currentRoomTag == "3") {
+		if (direction == "left") {
+			toRoom = "5";
+		} else {
+			toRoom = "4";
+		}
+	} else if (this.currentRoomTag == "4") {
+		if (direction == "left") {
+			toRoom = "3";
+		} else {
+			toRoom = "5";
+		}
+	} else if (this.currentRoomTag == "5") {
+		if (direction == "left") {
+			toRoom = "4";
+		} else {
+			toRoom = "3";
+		}
 	}
 	this.moveTo(toRoom);
-
 }
 
 Player.prototype.moveTo = function(toRoom) {

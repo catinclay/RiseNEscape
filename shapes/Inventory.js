@@ -9,6 +9,7 @@ function Inventory(canvasWidth, canvasHeight) {
 	this.items = [];
 
 	this.selectedIndex = -1;
+	this.hoverIndex = -1;
 }
 
 Inventory.prototype.collect = function(item) {
@@ -22,7 +23,7 @@ Inventory.prototype.setItemPosition = function(item, idx) {
 }
 
 Inventory.prototype.hitTest = function(hitX,hitY) {
-	return(hitY > this.canvasHeight - this.height);
+	return(hitY > this.canvasHeight - this.height && hitY < this.canvasHeight);
 }
 
 Inventory.prototype.selectedIndex = function() {
@@ -37,6 +38,19 @@ Inventory.prototype.select = function(posX, posY) {
 	} else {
 		this.selectedIndex = newSelectIndex;
 	}
+}
+
+Inventory.prototype.hover = function(posX, posY) {
+	let hoverIndex = Math.floor(posX / this.cellWidth);
+	if (hoverIndex < this.items.length) {
+		this.hoverIndex = hoverIndex;
+	} else {
+		this.unHover();
+	}
+}
+
+Inventory.prototype.unHover = function() {
+	this.hoverIndex = -1;
 }
 
 Inventory.prototype.tryUse = function() {
@@ -82,6 +96,16 @@ Inventory.prototype.drawToContext = function(theContext) {
 	// Draw all the items
 	for (var i = this.items.length - 1; i >= 0; i--) {
 		this.items[i].drawToContext(theContext);
+	}
+
+	if (this.hoverIndex != -1) {
+		theContext.strokeStyle = "#000000";
+		theContext.lineWidth = 4;
+		theContext.fillStyle = "rgba(255, 255, 255, 0.85)";
+		let w = 700;
+		let h = 400;
+		theContext.fillRect(450-w/2, 250-h/2, w, h);
+		theContext.strokeRect(450-w/2, 250-h/2, w, h);
 	}
 }
 

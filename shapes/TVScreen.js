@@ -41,9 +41,6 @@ TVScreen.prototype.collect = function() {
 //A function for drawing the particle.
 TVScreen.prototype.drawToContext = function(theContext) {
 	if (!this.isVisible()) return;
-	if (!this.isOn) {
-
-	}
 	if (this.isOn) {
 		theContext.textAlign = "center";
 		theContext.fillStyle = "rgba(255, 255, 255, 1)";

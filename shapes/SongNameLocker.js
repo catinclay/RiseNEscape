@@ -1,6 +1,6 @@
 // Simple class example
 
-function SongNameLocker(player, posX, posY, imageManager, roomTag, canvasWidth, canvasHeight) {
+function SongNameLocker(player, posX, posY, imageManager, roomTag, canvasWidth, canvasHeight, cocaine) {
 	this.roomTag = roomTag;
 	this.player = player;
 	this.canvasWidth = canvasWidth;
@@ -18,6 +18,9 @@ function SongNameLocker(player, posX, posY, imageManager, roomTag, canvasWidth, 
 
 	this.switchButtonWidth = 50;
 	this.switchButtonHeight = 50;
+	this.cocaine = cocaine;
+	this.cocaine.revealed = false;
+	this.isCleared = false;
 }
 
 //The function below returns a Boolean value representing whether the point with the coordinates supplied "hits" the particle.
@@ -38,7 +41,9 @@ SongNameLocker.prototype.press = function(hitX, hitY) {
 		this.player.currentRoomTag = this.roomTag;
 		return;
 	}
-	this.pressOnSwitchButton(hitX, hitY);
+	if (!this.isCleared) {
+		this.pressOnSwitchButton(hitX, hitY);
+	}
 }
 
 SongNameLocker.prototype.isPressOnBackButton = function(hitX, hitY) {
@@ -69,6 +74,13 @@ SongNameLocker.prototype.pressOnSwitchButton = function(hitX, hitY) {
 		} else if (this.charCodes[i] > 90) {
 			this.charCodes[i] -= 26;
 		}
+	}
+	let currentString = 
+	String.fromCharCode(this.charCodes[0],this.charCodes[1],this.charCodes[2],
+		this.charCodes[3],this.charCodes[4],this.charCodes[5],this.charCodes[6]);
+	if (!this.isCleared && currentString == this.answer) {
+		this.cocaine.revealed = true;
+		this.isCleared = true;
 	}
 }
 
@@ -107,12 +119,14 @@ SongNameLocker.prototype.drawToContext = function(theContext) {
 		for (var i = 0; i < this.charCodes.length; i++) {
 			theContext.fillStyle = "#000000";
 			theContext.fillText(String.fromCharCode(
-			this.charCodes[i]), this.canvasWidth/2 + (i-3) * charGap, this.canvasHeight/3 + 35);
-			theContext.fillStyle = "rgba(0, 0, 0, 0.2)";
-			theContext.fillRect(this.canvasWidth/2 + (i-3) * charGap - 25, 
-			this.canvasHeight/3 - 70, this.switchButtonWidth, this.switchButtonHeight);
-			theContext.fillRect(this.canvasWidth/2 + (i-3) * charGap - 25, 
-			this.canvasHeight/3 + 45 , this.switchButtonWidth, this.switchButtonHeight);
+				this.charCodes[i]), this.canvasWidth/2 + (i-3) * charGap, this.canvasHeight/3 + 35);
+			if (!this.isCleared) {
+				theContext.fillStyle = "rgba(0, 0, 0, 0.2)";
+				theContext.fillRect(this.canvasWidth/2 + (i-3) * charGap - 25, 
+				this.canvasHeight/3 - 70, this.switchButtonWidth, this.switchButtonHeight);
+				theContext.fillRect(this.canvasWidth/2 + (i-3) * charGap - 25, 
+				this.canvasHeight/3 + 45 , this.switchButtonWidth, this.switchButtonHeight);
+			}
 		}
 		theContext.fillStyle = "rgba(0, 0, 0, 0.2)";
 		let bottonWidth = 180;

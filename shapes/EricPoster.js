@@ -1,11 +1,11 @@
 // Simple class example
 
-function EricPoster(player, posX, posY, imageManager, roomTag) {
+function EricPoster(player, posX, posY, imageManager, roomTag, soundManager) {
 	this.roomTag = roomTag;
 	this.player = player;
 
 	this.imageManager = imageManager;
-
+	this.soundManager = soundManager;
 	this.imageWoG = imageManager.get("ECPwoGImage");
 	this.imageWithG = imageManager.get("ECPwithGImage");
 	this.image = this.imageWoG;
@@ -31,6 +31,7 @@ EricPoster.prototype.interact = function(item) {
 	if (item.getItemTag() === "guitar" && !this.hasGuitar) {
 		this.hasGuitar = true;
 		this.image = this.imageWithG;
+		this.soundManager.play("cocaine");
 		return true;
 	}
 	return false;

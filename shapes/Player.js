@@ -65,13 +65,21 @@ Player.prototype.warpAnimation = function(theContext) {
 }
 
 Player.prototype.skipIntro = function() {
-	if (this.introCountdown < this.defaultIntroCountdown - 150) {
+	if (this.introCountdown < this.defaultIntroCountdown - 75) {
 		this.introCountdown = 0;
 	}
 }
 
 //A function for drawing the particle.
 Player.prototype.drawToContext = function(theContext) {
+	if (this.currentRoomTag == "99") {
+		if (this.timeWarpCountdown > 0) {
+			theContext.fillStyle = "rgba(255, 255, 255, " + this.timeWarpCountdown / this.defaultTimeWarpCountdown + ")";
+			this.timeWarpCountdown--;
+			theContext.fillRect(0, 0, this.canvasWidth, this.canvasHeight);		
+		}
+		return;
+	}
 	if (this.introCountdown >= 0) {
 		this.introCountdown--;
 		theContext.fillStyle = "rgba(0, 0, 0, 1)";
@@ -91,25 +99,6 @@ Player.prototype.drawToContext = function(theContext) {
 		for (var i = this.introScripts.length - 1; i >= 0; i--) {
 			theContext.fillText(this.introScripts[i], 450, introTopMargin + i * introGap);
 		}
-		
-		// let image = this.introImage;
-		// var fetchHeight = 500;
-		// var width = image.width,
-  //           height = image.height;
-  //   	theContext.save();
-  //       for (var i = 0; i <= width / 2; ++i) {
-  //         	theContext.setTransform(1, 0,
-  //                -1 + 2 * (0.5 - i/height), 1, 0, -progress * (height - fetchHeight)); 
-  //         	theContext.drawImage(image,
-  //               width / 2-i, progress * (height - fetchHeight), 2, fetchHeight,
-  //               width / 2-i, progress * (height - fetchHeight), 2, fetchHeight);
-  //         	theContext.setTransform(1, 0,
-  //                 2 * i/height, 1, 0, - progress * (height - fetchHeight)); 
-  //         	theContext.drawImage(image,
-  //               width / 2+i, progress * (height - fetchHeight), 2, fetchHeight,
-  //               width / 2+i, progress * (height - fetchHeight), 2, fetchHeight);
-  //       }
-  //       theContext.restore();
 		return;
 	}
 

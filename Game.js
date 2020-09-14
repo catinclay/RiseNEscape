@@ -2,14 +2,13 @@ function Game(){}
 
 // TODO:
 // - Make Cocaine item
-// - Intro Scene
 // - Ending cut
 // - remove test code before upload
 
 // Option
 // - sfx
 // - Hover hint image?
-// - SB holder hint
+// - SB holder hint?
 // - item info
 
 
@@ -34,7 +33,7 @@ Game.prototype.initGame = function() {
 
 	// Backgrounds.
 	this.backgrounds = [];
-	this.backgrounds.push(new Background(this.player, this.imageManager));
+	this.backgrounds.push(new Background(this.player, this.canvasWidth, this.canvasHeight, this.imageManager));
 	this.drawables.push(this.backgrounds);
 
 
@@ -43,7 +42,7 @@ Game.prototype.initGame = function() {
 	this.drawables.push(this.itemsOnTheGround);
 
 	// Inventory, UI
-	this.inventory = new Inventory(this.canvasWidth, this.canvasHeight, this.soundManager);
+	this.inventory = new Inventory(this.player, this.canvasWidth, this.canvasHeight, this.soundManager);
 	this.uiHolder.push(this.inventory);
 	this.drawables.push(this.uiHolder);
 
@@ -116,7 +115,7 @@ Game.prototype.initGame = function() {
 	this.drawables.push(this.particles);
 
 	// Test code
-	// this.player.currentRoomTag = "4";
+	this.player.currentRoomTag = "0";
 	// this.inventory.collect(new CocaineItem(this.imageManager, "cocaineItemImage"));
 	
 	// let bombItem = new BombItem(this.imageManager, "timeBombItemImage");

@@ -1,6 +1,7 @@
 // Simple class example
 
-function Inventory(canvasWidth, canvasHeight, soundManager) {
+function Inventory(player, canvasWidth, canvasHeight, soundManager) {
+	this.player = player;
 	this.canvasWidth = canvasWidth;
 	this.canvasHeight = canvasHeight;
 	this.soundManager = soundManager;
@@ -72,6 +73,10 @@ Inventory.prototype.consume = function() {
 
 //A function for drawing the particle.
 Inventory.prototype.drawToContext = function(theContext) {
+	if (this.player.currentRoomTag == "99") {
+		return;
+	}
+
 	// Draw the top/bottom line.
 	theContext.strokeStyle = "#FF0000";
 	theContext.beginPath();

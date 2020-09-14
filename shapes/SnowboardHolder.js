@@ -1,6 +1,6 @@
 // Simple class example
 
-function SnowboardHolder(player, posX, posY, imageManager, roomTag) {
+function SnowboardHolder(player, posX, posY, imageManager, roomTag, widthScale) {
 	this.roomTag = roomTag;
 	this.player = player;
 
@@ -12,6 +12,7 @@ function SnowboardHolder(player, posX, posY, imageManager, roomTag) {
 	this.hasSB = false;
 	this.sbTag = "";
 	this.isCleared = false;
+	this.widthScale = widthScale;
 }
 
 //The function below returns a Boolean value representing whether the point with the coordinates supplied "hits" the particle.
@@ -99,8 +100,8 @@ SnowboardHolder.prototype.drawToContext = function(theContext) {
 	theContext.save();
 	theContext.translate(this.x, this.y);
   	theContext.drawImage(this.image, 
-  						-this.image.width / 2, 
-  						-this.image.height / 2);
+  						-this.image.width / 2 * this.widthScale, 
+  						-this.image.height / 2, this.image.width * this.widthScale, this.image.height);
   	if (this.hasSB) {
   		theContext.drawImage(this.sbImage, 
   						-this.sbImage.width / 2, 

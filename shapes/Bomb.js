@@ -34,7 +34,9 @@ Bomb.prototype.collect = function() {
 	if (this.box) {
 		this.box.bombCollect();
 	}
-	return new BombItem(this.imageManager, "timeBombItemImage");
+	let bombItem = new BombItem(this.imageManager, "timeBombItemImage");
+	bombItem.applyPlayer(this.player);
+	return bombItem;
 }
 
 Bomb.prototype.interact = function(item) {

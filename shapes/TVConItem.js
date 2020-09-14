@@ -16,6 +16,17 @@ TVConItem.prototype.getItemTag = function() {
 	return this.itemTag;
 }
 
+TVConItem.prototype.getItemDescription = function() {
+	let description = {};
+	description["itemName"] = "TV Controller";
+	description["0"] = ""
+	description["1"] = "A controller to control TV[1]";
+	description["2"] = "";
+	description["3"] = "";
+	description["4"] = "[1]: Television";
+	return description;
+}
+
 //A function for drawing the particle.
 TVConItem.prototype.drawToContext = function(theContext) {
 	if (!this.image) return;

@@ -1,13 +1,16 @@
 function Game(){}
 
 // TODO:
-// - item info
-// - SB holder hint
-// - Song name locker hint
 // - Time warp animation
+// - Intro Scene
+// - Ending cut
+// - remove test code before upload
 
 // Option
+// - Song name locker hint: arrow
 // - Hover hint image?
+// - SB holder hint
+// - item info
 
 
 Game.prototype.init = function(fp, canvasWidth, canvasHeight, imageManager, soundManager){
@@ -74,13 +77,13 @@ Game.prototype.initGame = function() {
 	this.itemsOnTheGround.push(new SunLogo(this.player, 450, 100, this.imageManager, "3", this.soundManager, ftvScreen));
 
 	// Snowboard holder, player, posX, posY, imageManager, roomTag, itemsOnTheGround
-	let sbholder1 = new SnowboardHolder(this.player, 450, 70, this.imageManager, "1");
-	let sbholder2 = new SnowboardHolder(this.player, 450, 130, this.imageManager, "1");
+	let sbholder1 = new SnowboardHolder(this.player, 450, 70, this.imageManager, "1", 1);
+	let sbholder2 = new SnowboardHolder(this.player, 450, 130, this.imageManager, "1", 0.9);
 	this.itemsOnTheGround.push(sbholder1);
 	this.itemsOnTheGround.push(sbholder2);
 
 	// put sdoa on the third sb holder;
-	let sbholder3 = new SnowboardHolder(this.player, 450, 190, this.imageManager, "1");
+	let sbholder3 = new SnowboardHolder(this.player, 450, 190, this.imageManager, "1", 0.8);
 	sbholder3.putsb("hangsdoasbImage", "sdoasb");
 	this.itemsOnTheGround.push(sbholder3);
 
@@ -113,8 +116,15 @@ Game.prototype.initGame = function() {
 	this.drawables.push(this.particles);
 
 	// Test code
+	// this.player.currentRoomTag = "4";
 	// this.inventory.collect(new CocaineItem(this.imageManager, "cocaineItemImage"));
-	this.player.currentRoomTag = "0";
+	
+	// let bombItem = new BombItem(this.imageManager, "timeBombItemImage");
+	// bombItem.applyPlayer(this.player);
+	// this.inventory.collect(bombItem);
+	// this.inventory.collect(new GoggleItem(this.imageManager, "goggleItemImage"));
+	// this.inventory.collect(new LetterItem(this.imageManager, "letterItemImage"));
+	// this.inventory.collect(new TVConItem(this.imageManager, "tvConItemImage"));
 }
 
 Game.prototype.update = function() {

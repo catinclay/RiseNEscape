@@ -16,6 +16,17 @@ CocaineItem.prototype.getItemTag = function() {
 	return this.itemTag;
 }
 
+CocaineItem.prototype.getItemDescription = function() {
+	let description = {};
+	description["itemName"] = "C*****n";
+	description["0"] = ""
+	description["1"] = "";
+	description["2"] = "shhh..";
+	description["3"] = "";
+	description["4"] = "";
+	return description;
+}
+
 //A function for drawing the particle.
 CocaineItem.prototype.drawToContext = function(theContext) {
 	if (!this.image) return;

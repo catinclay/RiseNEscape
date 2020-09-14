@@ -16,6 +16,17 @@ GoggleItem.prototype.getItemTag = function() {
 	return this.itemTag;
 }
 
+GoggleItem.prototype.getItemDescription = function() {
+	let description = {};
+	description["itemName"] = "Google";
+	description["0"] = "Beautiful google"
+	description["1"] = "hmm..";
+	description["2"] = "";
+	description["3"] = "Have I seen this somewhere before?";
+	description["4"] = "";
+	return description;
+}
+
 //A function for drawing the particle.
 GoggleItem.prototype.drawToContext = function(theContext) {
 	if (!this.image) return;

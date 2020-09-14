@@ -10,6 +10,9 @@ function Inventory(canvasWidth, canvasHeight) {
 
 	this.selectedIndex = -1;
 	this.hoverIndex = -1;
+
+	this.defaultHoverCountDown = 15;
+	this.hoverCountDown = this.defaultHoverCountDown;
 }
 
 Inventory.prototype.collect = function(item) {
@@ -99,13 +102,52 @@ Inventory.prototype.drawToContext = function(theContext) {
 	}
 
 	if (this.hoverIndex != -1) {
-		theContext.strokeStyle = "#000000";
-		theContext.lineWidth = 4;
-		theContext.fillStyle = "rgba(255, 255, 255, 0.85)";
-		let w = 700;
-		let h = 400;
-		theContext.fillRect(450-w/2, 250-h/2, w, h);
-		theContext.strokeRect(450-w/2, 250-h/2, w, h);
+		this.hoverCountDown--;
+		if (this.hoverCountDown <= 0) {
+			theContext.strokeStyle = "#000000";
+			theContext.lineWidth = 4;
+			theContext.fillStyle = "rgba(255, 255, 255, 0.95)";
+			let w = 700;
+			let h = 400;
+			theContext.fillRect(450-w/2, 250-h/2, w, h);
+			theContext.strokeRect(450-w/2, 250-h/2, w, h);
+			let itemDescription = this.items[this.hoverIndex].getItemDescription();
+
+			theContext.textAlign = "center";
+			theContext.font = "35px Comic Sans MS";
+			theContext.fillStyle = "rgba(0, 0, 255, 1)";
+			if (itemDescription["itemName"]) {
+				theContext.fillText(itemDescription["itemName"], 450, 125);
+			}
+
+			theContext.font = "25px Comic Sans MS";
+			theContext.fillStyle = "rgba(0, 0, 0, 1)";
+			let desTopMargin = 200;
+			let desGap = 45;
+			if (itemDescription["0"]) {
+				theContext.fillText(itemDescription["0"], 450, desTopMargin);
+			}
+			if (itemDescription["1"]) {
+				theContext.fillText(itemDescription["1"], 450, desTopMargin + desGap);
+			}
+			if (itemDescription["2"]) {
+				if (this.items[this.hoverIndex].itemTag == "bomb") {
+					theContext.fillStyle = "rgba(255, 0, 0, 1)";
+					theContext.fillText(itemDescription["2"], 450, desTopMargin + desGap * 2);
+					theContext.fillStyle = "rgba(0, 0, 0, 1)";
+				} else {
+					theContext.fillText(itemDescription["2"], 450, desTopMargin + desGap * 2);
+				}
+			}
+			if (itemDescription["3"]) {
+				theContext.fillText(itemDescription["3"], 450, desTopMargin + desGap * 3);
+			}
+			if (itemDescription["4"]) {
+				theContext.fillText(itemDescription["4"], 450, desTopMargin + desGap * 4);
+			}
+		}
+	} else {
+		this.hoverCountDown = this.defaultHoverCountDown;
 	}
 }
 

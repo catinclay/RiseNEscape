@@ -75,6 +75,7 @@ Gate.prototype.collect = function() {
 		this.player.currentRoomTag = this.toRoomTag;
 	} else if (this.clickOnGate && this.isLastGate) {
 		this.player.currentRoomTag = 99;
+		this.player.stopCocaineSong();
 	}
 	return;
 }

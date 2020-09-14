@@ -16,6 +16,17 @@ LetterItem.prototype.getItemTag = function() {
 	return this.itemTag;
 }
 
+LetterItem.prototype.getItemDescription = function() {
+	let description = {};
+	description["itemName"] = "A Piece of Paper";
+	description["0"] = ""
+	description["1"] = "2020/9/15";
+	description["2"] = "";
+	description["3"] = "It most be an important date.";
+	description["4"] = "";
+	return description;
+}
+
 //A function for drawing the particle.
 LetterItem.prototype.drawToContext = function(theContext) {
 	if (!this.image) return;

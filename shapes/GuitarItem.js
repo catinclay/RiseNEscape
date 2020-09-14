@@ -16,6 +16,17 @@ GuitarItem.prototype.getItemTag = function() {
 	return this.itemTag;
 }
 
+GuitarItem.prototype.getItemDescription = function() {
+	let description = {};
+	description["itemName"] = "Guitar";
+	description["0"] = "Good quality,"
+	description["1"] = "not sure why it's left here.";
+	description["2"] = "Looks like belongs to a super star.";
+	description["3"] = "Maybe I should return this to him?";
+	description["4"] = "";
+	return description;
+}
+
 //A function for drawing the particle.
 GuitarItem.prototype.drawToContext = function(theContext) {
 	if (!this.image) return;

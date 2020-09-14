@@ -16,6 +16,21 @@ BombItem.prototype.getItemTag = function() {
 	return this.itemTag;
 }
 
+BombItem.prototype.applyPlayer = function(player) {
+	this.player = player;
+}
+
+BombItem.prototype.getItemDescription = function() {
+	let description = {};
+	description["itemName"] = "Time Bomb";
+	description["0"] = "Good for breaking anything"
+	description["1"] = "This bomb will explode in";
+	description["2"] = this.player.bombCountDownSecond + "";
+	description["3"] = "Seconds.";
+	description["4"] = "Watch out!!";
+	return description;
+}
+
 //A function for drawing the particle.
 BombItem.prototype.drawToContext = function(theContext) {
 	if (!this.image) return;

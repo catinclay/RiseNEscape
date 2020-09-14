@@ -31,7 +31,7 @@ EricPoster.prototype.interact = function(item) {
 	if (item.getItemTag() === "guitar" && !this.hasGuitar) {
 		this.hasGuitar = true;
 		this.image = this.imageWithG;
-		this.soundManager.play("cocaine");
+		this.player.cocaineAudio = this.soundManager.play("cocaine");
 		return true;
 	}
 	return false;

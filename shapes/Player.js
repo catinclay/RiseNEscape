@@ -6,6 +6,9 @@ function Player(canvasWidth, canvasHeight) {
 	this.directionBottonWidth = this.canvasWidth/30;
 
 	this.currentRoomTag = "0";
+
+	this.bombCountDownSecond = 1261440000;
+	this.fpsPassed = 0;
 }
 
 
@@ -19,6 +22,11 @@ Player.prototype.hitTest = function(hitX,hitY) {
 
 //A function for drawing the particle.
 Player.prototype.drawToContext = function(theContext) {
+	this.fpsPassed++;
+	if(this.fpsPassed >= 30) {
+		this.fpsPassed = 0;
+		this.bombCountDownSecond--;
+	}
 	theContext.fillStyle = "rgba(255, 0, 0, 0.3)";
 	theContext.fillRect(0, 0, this.directionBottonWidth, this.canvasHeight - 1/6*this.canvasHeight);
 	theContext.fillRect(this.canvasWidth - this.directionBottonWidth, 0, this.canvasWidth, this.canvasHeight - 1/6*this.canvasHeight);
@@ -69,6 +77,12 @@ Player.prototype.move = function(direction) {
 		}
 	}
 	this.moveTo(toRoom);
+}
+
+Player.prototype.stopCocaineSong = function() {
+	if (this.cocaineAudio) {
+		this.cocaineAudio.pause();
+	}
 }
 
 Player.prototype.moveTo = function(toRoom) {

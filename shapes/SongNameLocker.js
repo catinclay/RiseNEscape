@@ -81,6 +81,7 @@ SongNameLocker.prototype.pressOnSwitchButton = function(hitX, hitY) {
 	if (!this.isCleared && currentString == this.answer) {
 		this.cocaine.revealed = true;
 		this.isCleared = true;
+		this.player.stopCocaineSong();
 	}
 }
 

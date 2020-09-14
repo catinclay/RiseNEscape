@@ -1,10 +1,11 @@
 // Simple class example
 
-function TVScreen(player, posX, posY, imageManager, roomTag, itemsOnTheGround) {
+function TVScreen(player, posX, posY, imageManager, soundManager, roomTag, itemsOnTheGround) {
 	this.roomTag = roomTag;
 	this.player = player;
 	this.itemsOnTheGround = itemsOnTheGround;
 	this.imageManager = imageManager;
+	this.soundManager = soundManager;
 	this.x = posX;
 	this.y = posY;
 	this.isOn = false;
@@ -28,6 +29,7 @@ TVScreen.prototype.isVisible = function() {
 TVScreen.prototype.interact = function(item) {
 	if (item.getItemTag() === "tvCon" && !this.isOn) {
 		this.isOn = true;
+		this.soundManager.play("tvon");
 		this.itemsOnTheGround.unshift(new Snowboard(this.player, 465, 200, this.imageManager, "2", "hang011sbImage", "011sbItemImage", "011sb"));
 		return true;
 	}

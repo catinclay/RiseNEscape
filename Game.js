@@ -1,7 +1,6 @@
 function Game(){}
 
 // TODO:
-// - Time warp animation
 // - Intro Scene
 // - Ending cut
 // - remove test code before upload
@@ -43,7 +42,7 @@ Game.prototype.initGame = function() {
 	this.drawables.push(this.itemsOnTheGround);
 
 	// Inventory, UI
-	this.inventory = new Inventory(this.canvasWidth, this.canvasHeight);
+	this.inventory = new Inventory(this.canvasWidth, this.canvasHeight, this.soundManager);
 	this.uiHolder.push(this.inventory);
 	this.drawables.push(this.uiHolder);
 
@@ -65,7 +64,7 @@ Game.prototype.initGame = function() {
 	this.itemsOnTheGround.push(new TVCon(this.player, 400, 335, this.imageManager, "0"));
 
 	// TV
-	this.itemsOnTheGround.push(new TVScreen(this.player, 467, 175, this.imageManager, "2", this.itemsOnTheGround));
+	this.itemsOnTheGround.push(new TVScreen(this.player, 467, 175, this.imageManager, this.soundManager, "2", this.itemsOnTheGround));
 
 	// Eric poster
 	this.itemsOnTheGround.push(new EricPoster(this.player, 450, 110, this.imageManager, "0", this.soundManager));
@@ -116,7 +115,7 @@ Game.prototype.initGame = function() {
 	this.drawables.push(this.particles);
 
 	// Test code
-	this.player.currentRoomTag = "4";
+	// this.player.currentRoomTag = "4";
 	// this.inventory.collect(new CocaineItem(this.imageManager, "cocaineItemImage"));
 	
 	// let bombItem = new BombItem(this.imageManager, "timeBombItemImage");

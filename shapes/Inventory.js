@@ -1,8 +1,9 @@
 // Simple class example
 
-function Inventory(canvasWidth, canvasHeight) {
+function Inventory(canvasWidth, canvasHeight, soundManager) {
 	this.canvasWidth = canvasWidth;
 	this.canvasHeight = canvasHeight;
+	this.soundManager = soundManager;
 	this.height = 1/6*this.canvasHeight;
 	this.cellNumber = 9;
 	this.cellWidth = this.canvasWidth / this.cellNumber;
@@ -19,6 +20,7 @@ Inventory.prototype.collect = function(item) {
 	if (!item) return;
 	this.setItemPosition(item, this.items.length);
 	this.items.push(item);
+	this.soundManager.play("itemfound");
 }
 
 Inventory.prototype.setItemPosition = function(item, idx) {

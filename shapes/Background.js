@@ -24,7 +24,6 @@ function Background(player, canvasWidth, canvasHeight, imageManager) {
 //A function for drawing the particle.
 Background.prototype.drawToContext = function(theContext) {
 	theContext.save();
-	console.log(this.endingCutCountup);
 	if (this.backgroundImages[this.player.currentRoomTag]) {
 		this.image = this.backgroundImages[this.player.currentRoomTag];
 	  	theContext.drawImage(this.image, 0, 0);

@@ -5,7 +5,7 @@ function Player(canvasWidth, canvasHeight) {
 	this.canvasHeight = canvasHeight;
 	this.directionBottonWidth = this.canvasWidth/30;
 
-	this.currentRoomTag = "1";
+	this.currentRoomTag = "2";
 }
 
 
@@ -17,10 +17,9 @@ Player.prototype.hitTest = function(hitX,hitY) {
 		(hitX < this.canvasWidth));
 }
 
-
 //A function for drawing the particle.
 Player.prototype.drawToContext = function(theContext) {
-	theContext.fillStyle = "rgba(255, 0, 0, 0.5)";
+	theContext.fillStyle = "rgba(255, 0, 0, 0.3)";
 	theContext.fillRect(0, 0, this.directionBottonWidth, this.canvasHeight - 1/6*this.canvasHeight);
 	theContext.fillRect(this.canvasWidth - this.directionBottonWidth, 0, this.canvasWidth, this.canvasHeight - 1/6*this.canvasHeight);
 }
@@ -31,7 +30,7 @@ Player.prototype.getMoveDirection = function(hitX, hitY) {
 }
 
 Player.prototype.move = function(direction) {
-	let toRoom = "";
+	let toRoom = this.currentRoomTag;
 	if (this.currentRoomTag == "1") {
 		if (direction == "left") {
 			toRoom = "0";

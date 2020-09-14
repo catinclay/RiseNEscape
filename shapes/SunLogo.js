@@ -4,7 +4,6 @@ function SunLogo(player, posX, posY, imageManager, roomTag) {
 	this.roomTag = roomTag;
 	this.player = player;
 
-	this.isCollectedItem = false;
 	this.imageManager = imageManager;
 
 	this.imageWoGoggle = imageManager.get("sunwoGoggleImage");
@@ -25,7 +24,7 @@ SunLogo.prototype.hitTest = function(hitX,hitY) {
 }
 
 SunLogo.prototype.isVisible = function() {
-	return this.player.currentRoomTag == this.roomTag && !this.isCollected;
+	return this.player.currentRoomTag == this.roomTag;
 }
 
 SunLogo.prototype.interact = function(item) {

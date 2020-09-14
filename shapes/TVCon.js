@@ -1,21 +1,18 @@
 // Simple class example
 
-function EricPoster(player, posX, posY, imageManager, roomTag) {
+function TVCon(player, posX, posY, imageManager, roomTag) {
 	this.roomTag = roomTag;
 	this.player = player;
-
 	this.imageManager = imageManager;
-
-	this.imageWoG = imageManager.get("ECPwoGImage");
-	this.imageWithG = imageManager.get("ECPwithGImage");
-	this.image = this.imageWoG;
+	this.image = imageManager.get("tvConImage");
 	this.x = posX;
 	this.y = posY;
-	this.hasGuitar = false;
+	this.fp = 1;
+	this.isCollected = false;
 }
 
 //The function below returns a Boolean value representing whether the point with the coordinates supplied "hits" the particle.
-EricPoster.prototype.hitTest = function(hitX,hitY) {
+TVCon.prototype.hitTest = function(hitX,hitY) {
 	return this.isVisible() &&
 		((hitX > this.x - this.image.width / 2) && 
 		(hitX < this.x + this.image.width / 2) && 
@@ -23,25 +20,21 @@ EricPoster.prototype.hitTest = function(hitX,hitY) {
 		(hitY < this.y + this.image.height / 2));
 }
 
-EricPoster.prototype.isVisible = function() {
-	return this.player.currentRoomTag == this.roomTag;
+TVCon.prototype.isVisible = function() {
+	return this.player.currentRoomTag == this.roomTag && !this.isCollected;
 }
 
-EricPoster.prototype.interact = function(item) {
-	if (item.getItemTag() === "guitar" && !this.hasGuitar) {
-		this.hasGuitar = true;
-		this.image = this.imageWithG;
-		return true;
-	}
+TVCon.prototype.collect = function() {
+	this.isCollected = true;
+	return new TVConItem(this.imageManager, "tvConItemImage");
+}
+
+TVCon.prototype.interact = function(item) {
 	return false;
 }
 
-EricPoster.prototype.collect = function() {
-	return;
-}
-
 //A function for drawing the particle.
-EricPoster.prototype.drawToContext = function(theContext) {
+TVCon.prototype.drawToContext = function(theContext) {
 	if (!this.isVisible()) return;
 	theContext.save();
 	theContext.translate(this.x, this.y);
@@ -51,6 +44,6 @@ EricPoster.prototype.drawToContext = function(theContext) {
   	theContext.restore();
 }
 
-EricPoster.prototype.shouldDestroy = function(theContext) {
+TVCon.prototype.shouldDestroy = function(theContext) {
 	return false;
 }

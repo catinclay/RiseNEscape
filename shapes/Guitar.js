@@ -29,6 +29,10 @@ Guitar.prototype.collect = function() {
 	return new GuitarItem(this.imageManager, "guitarItemImage");
 }
 
+Guitar.prototype.interact = function(item) {
+	return false;
+}
+
 //A function for drawing the particle.
 Guitar.prototype.drawToContext = function(theContext) {
 	if (!this.isVisible()) return;

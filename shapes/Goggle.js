@@ -29,6 +29,10 @@ Goggle.prototype.collect = function() {
 	return new GoggleItem(this.imageManager, "goggleItemImage");
 }
 
+Goggle.prototype.interact = function(item) {
+	return false;
+}
+
 //A function for drawing the particle.
 Goggle.prototype.drawToContext = function(theContext) {
 	if (!this.isVisible()) return;

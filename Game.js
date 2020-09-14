@@ -12,32 +12,60 @@ Game.prototype.init = function(fp, canvasWidth, canvasHeight, imageManager, soun
 
 Game.prototype.initGame = function() {
 	this.drawables = [];
-	// Inventory
-	this.inventory = new Inventory(this.canvasWidth, this.canvasHeight);
-	this.uiHolder = [];
-	this.uiHolder.push(this.inventory);
-	this.drawables.push(this.uiHolder);
 
-	// Items on the ground.
-	this.itemsOnTheGround = [];
-	this.drawables.push(this.itemsOnTheGround);
+	this.uiHolder = [];
 
 	// Player.
 	this.player = new Player(this.canvasWidth, this.canvasHeight);
 	this.uiHolder.push(this.player);
 
+	// Backgrounds.
+	this.backgrounds = [];
+	this.backgrounds.push(new Background(this.player, this.imageManager));
+	this.drawables.push(this.backgrounds);
+
+	// Inventory
+	this.inventory = new Inventory(this.canvasWidth, this.canvasHeight);
+	this.uiHolder.push(this.inventory);
+	this.drawables.push(this.uiHolder);
+
+
+	// Items on the ground.
+	this.itemsOnTheGround = [];
+	this.drawables.push(this.itemsOnTheGround);
+
 	// Guitar.
-	this.itemsOnTheGround.push(new Guitar(this.player, 200, 300, this.imageManager, "1"));
+	this.itemsOnTheGround.push(new Guitar(this.player, 500, 400, this.imageManager, "1"));
 
 	// Goggle
-	this.itemsOnTheGround.push(new Goggle(this.player, 600, 200, this.imageManager, "2"));
+	this.itemsOnTheGround.push(new Goggle(this.player, 500, 325, this.imageManager, "0"));
 
+	// TV Controller
+	this.itemsOnTheGround.push(new TVCon(this.player, 400, 335, this.imageManager, "0"));
+
+	// TV
+	this.itemsOnTheGround.push(new TVScreen(this.player, 467, 175, this.imageManager, "2", this.itemsOnTheGround));
 
 	// Eric poster
-	this.itemsOnTheGround.push(new EricPoster(this.player, 400, 200, this.imageManager, "0"));
+	this.itemsOnTheGround.push(new EricPoster(this.player, 450, 110, this.imageManager, "0"));
+
+	// Song name locker
+	this.itemsOnTheGround.push(new SongNameLocker(this.player, 330, 160, this.imageManager, "0", this.canvasWidth, this.canvasHeight));
 
 	// Sun Logo
-	this.itemsOnTheGround.push(new SunLogo(this.player, 200, 100, this.imageManager, "1"))
+	this.itemsOnTheGround.push(new SunLogo(this.player, 175, 90, this.imageManager, "2"));
+
+	// Snowboard holder, player, posX, posY, imageManager, roomTag, itemsOnTheGround
+	this.itemsOnTheGround.push(new SnowboardHolder(this.player, 450, 70, this.imageManager, "1", this.itemsOnTheGround));
+	this.itemsOnTheGround.push(new SnowboardHolder(this.player, 450, 130, this.imageManager, "1", this.itemsOnTheGround));
+	// put sdoa on the third sb holder;
+	let sbholder = new SnowboardHolder(this.player, 450, 190, this.imageManager, "1", this.itemsOnTheGround);
+	sbholder.putsb("hangsdoasbImage", "sdoasb");
+	this.itemsOnTheGround.push(sbholder);
+
+
+	// Snowboards, sbImageName, sbItemImageName, sbtag
+	this.itemsOnTheGround.push(new Snowboard(this.player, 175, 300, this.imageManager, "2", "jumesbImage", "jumesbItemImage", "jumesb"));
 
 	this.particles = [];
 	this.drawables.push(this.particles);

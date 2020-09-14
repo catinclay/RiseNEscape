@@ -23,6 +23,8 @@ function Background(player, canvasWidth, canvasHeight, imageManager) {
 
 //A function for drawing the particle.
 Background.prototype.drawToContext = function(theContext) {
+	theContext.save();
+	console.log(this.endingCutCountup);
 	if (this.backgroundImages[this.player.currentRoomTag]) {
 		this.image = this.backgroundImages[this.player.currentRoomTag];
 	  	theContext.drawImage(this.image, 0, 0);
@@ -42,12 +44,11 @@ Background.prototype.drawToContext = function(theContext) {
 		if (this.endingCutCountup < 200) {
 			theContext.globalAlpha = 1;
 			theContext.drawImage(mask, -30 + this.lightMarginX, -50 + this.lightMarginY);
-			theContext.restore();
 		} else if (this.endingCutCountup < 1000) {
 			theContext.globalAlpha = 1 - (this.endingCutCountup - 200) / 800;
 			theContext.drawImage(mask, -30 + this.lightMarginX, -50 + this.lightMarginY);
-			theContext.restore();
 		}
+		theContext.restore();
 
 		if (this.endingCutCountup < 0) {
 			theContext.fillStyle = "rgba(0, 0, 0, 1)";

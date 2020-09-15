@@ -10,6 +10,8 @@ soundManager.registerSound({name:'rnrGreeting', src:'sounds/risenridegreeting.mp
 soundManager.registerSound({name:'tvon', src:'sounds/tvon.mp3'}, 1, 1);
 soundManager.registerSound({name:'itemfound', src:'sounds/itemfound.mp3'}, 1, 2);
 soundManager.registerSound({name:'blow', src:'sounds/blowSound.mp3'}, 1, 1);
+soundManager.registerSound({name:'negi', src:'sounds/negi.mp3'}, 1, 1);
+soundManager.registerSound({name:'hbsong', src:'sounds/hbsong.mp3'}, 1, 1);
 
 var loadPromises = [
 	imageManager.registerImage({name:'flightImage', path: 'image/', src:'flightIcon.png'}),

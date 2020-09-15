@@ -25,6 +25,7 @@ function Background(player, canvasWidth, canvasHeight, imageManager, soundManage
 
 	this.isBlowingCandle = false;
 	this.blowCandleCounter = 15;
+	this.isPlayingHBSong = false;
 
 	this.credits = [
 		"-Credits-",
@@ -69,6 +70,7 @@ function Background(player, canvasWidth, canvasHeight, imageManager, soundManage
 		"",
 		"",
 		"",
+		"",
 		"+Birthdayer+",
 		"",
 		"Sien Chang",
@@ -80,7 +82,7 @@ function Background(player, canvasWidth, canvasHeight, imageManager, soundManage
 }
 
 Background.prototype.blowCandle = function() {
-	if (this.endingCutCountup >= 800 && !this.isBlowingCandle){
+	if (this.endingCutCountup >= 900 && !this.isBlowingCandle){
 		// blow candle
 		this.soundManager.play("blow");
 		this.isBlowingCandle = true;
@@ -88,7 +90,13 @@ Background.prototype.blowCandle = function() {
 }
 
 Background.prototype.goToCredit = function() {
+	if (!this.isRunningCredit) {
+		if (this.hbsong) {
+			this.hbsong.pause();
+		}
 		this.isRunningCredit = true;
+		this.soundManager.play("negi");
+	}
 }
 
 
@@ -96,7 +104,7 @@ Background.prototype.goToCredit = function() {
 Background.prototype.drawToContext = function(theContext) {
 	// Credits
 	if (this.isRunningCredit) {
-		if (this.creditCountup < 1905) {
+		if (this.creditCountup < 1910) {
 			this.creditCountup++;
 		}
 		theContext.fillStyle = "rgba(0, 0, 0, 1)";
@@ -151,20 +159,24 @@ Background.prototype.drawToContext = function(theContext) {
 		}
 		
 		theContext.save();
-		if (this.endingCutCountup < 200) {
+		if (this.endingCutCountup >= -120 && !this.isPlayingHBSong) {
+			this.isPlayingHBSong = true;
+			this.hbsong = this.soundManager.play("hbsong");
+		}
+		if (this.endingCutCountup < 500) {
 			theContext.globalAlpha = 1;
 			theContext.drawImage(mask, -30 + this.lightMarginX, -50 + this.lightMarginY);
-		} else if (this.endingCutCountup < 1000) {
-			theContext.globalAlpha = 1 - (this.endingCutCountup - 200) / 800;
+		} else if (this.endingCutCountup < 1500) {
+			theContext.globalAlpha = 1 - (this.endingCutCountup - 500) / 1000;
 			theContext.drawImage(mask, -30 + this.lightMarginX, -50 + this.lightMarginY);
 		}
 		theContext.restore();
 
-		if (this.endingCutCountup < 0) {
+		if (this.endingCutCountup < 180) {
 			theContext.fillStyle = "rgba(0, 0, 0, 1)";
 			theContext.fillRect(0, 0, this.canvasWidth, this.canvasHeight);		
-		} else if(this.endingCutCountup >= 0 && this.endingCutCountup <= 200) {
-			theContext.fillStyle = "rgba(0, 0, 0, " + (1 - this.endingCutCountup/200) + ")";
+		} else if(this.endingCutCountup >= 180 && this.endingCutCountup <= 500) {
+			theContext.fillStyle = "rgba(0, 0, 0, " + (1 - (this.endingCutCountup-180)/320) + ")";
 			theContext.fillRect(0, 0, this.canvasWidth, this.canvasHeight);		
 		}
 	}

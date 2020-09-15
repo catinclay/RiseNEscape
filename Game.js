@@ -33,7 +33,7 @@ Game.prototype.initGame = function() {
 
 	// Backgrounds.
 	this.backgrounds = [];
-	this.backgrounds.push(new Background(this.player, this.canvasWidth, this.canvasHeight, this.imageManager));
+	this.backgrounds.push(new Background(this.player, this.canvasWidth, this.canvasHeight, this.imageManager, this.soundManager));
 	this.drawables.push(this.backgrounds);
 
 
@@ -115,14 +115,14 @@ Game.prototype.initGame = function() {
 	this.drawables.push(this.particles);
 
 	// Test code
-	this.player.currentRoomTag = "0";
+	// this.player.currentRoomTag = "4";
+	// this.inventory.collect(new LetterItem(this.imageManager, "letterItemImage"));
 	// this.inventory.collect(new CocaineItem(this.imageManager, "cocaineItemImage"));
 	
 	// let bombItem = new BombItem(this.imageManager, "timeBombItemImage");
 	// bombItem.applyPlayer(this.player);
 	// this.inventory.collect(bombItem);
 	// this.inventory.collect(new GoggleItem(this.imageManager, "goggleItemImage"));
-	// this.inventory.collect(new LetterItem(this.imageManager, "letterItemImage"));
 	// this.inventory.collect(new TVConItem(this.imageManager, "tvConItemImage"));
 }
 
@@ -138,6 +138,11 @@ Game.prototype.inputDownListener = function(touchX, touchY) {
 		this.player.skipIntro();
 		return;
 	}
+
+	if (this.player.currentRoomTag == "99") {
+		this.backgrounds[0].blowCandle();
+	}
+
 	if (this.inventory.hitTest(touchX, touchY)) {
 		this.inventory.select(touchX, touchY);
 		return;

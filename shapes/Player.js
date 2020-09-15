@@ -15,9 +15,13 @@ function Player(canvasWidth, canvasHeight, imageManager) {
 	this.defaultTimeWarpCountdown = 75
 	this.timeWarpCountdown = 0;
 
-	this.defaultIntroCountdown = 2500;
+	this.defaultIntroCountdown = 2600;
 	this.introCountdown = this.defaultIntroCountdown;
 	this.introScripts = [
+	"Start",
+	"",
+	"",
+	"",
 	"This is a beautiful day", 
 	"Birds are singing",
 	"Flowers are blooming",
@@ -65,6 +69,10 @@ Player.prototype.warpAnimation = function(theContext) {
 }
 
 Player.prototype.skipIntro = function() {
+	if (this.introCountdown == this.defaultIntroCountdown) {
+		this.introCountdown--;
+	}
+
 	if (this.introCountdown < this.defaultIntroCountdown - 75) {
 		this.introCountdown = 0;
 	}
@@ -81,7 +89,9 @@ Player.prototype.drawToContext = function(theContext) {
 		return;
 	}
 	if (this.introCountdown >= 0) {
-		this.introCountdown--;
+		if (this.introCountdown < this.defaultIntroCountdown) {
+			this.introCountdown--;
+		}
 		theContext.fillStyle = "rgba(0, 0, 0, 1)";
 		theContext.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
 		if (this.introCountdown < this.defaultIntroCountdown - 150) {
@@ -94,7 +104,7 @@ Player.prototype.drawToContext = function(theContext) {
 		theContext.textAlign = "center";
 		theContext.font = "40px Comic Sans MS";
 		theContext.fillStyle = "rgba(255, 255, 0, 1)";
-		let introTopMargin = this.canvasHeight + 50 + (this.introCountdown - this.defaultIntroCountdown);
+		let introTopMargin = this.canvasHeight - 150 + (this.introCountdown - this.defaultIntroCountdown);
 		let introGap = 60;
 		for (var i = this.introScripts.length - 1; i >= 0; i--) {
 			theContext.fillText(this.introScripts[i], 450, introTopMargin + i * introGap);

@@ -53,6 +53,11 @@ function Background(player, canvasWidth, canvasHeight, imageManager, soundManage
 		"Eric Clapton",
 		"",
 		"",
+		"+Shakerer+",
+		"",
+		"Sandy Hsiao",
+		"",
+		"",
 		"+Puzzle Designer+",
 		"",
 		"Connie Chen",
@@ -66,7 +71,9 @@ function Background(player, canvasWidth, canvasHeight, imageManager, soundManage
 		"",
 		"",
 		"",
-		"And the most inportant",
+		"And the most important",
+		"",
+		"",
 		"",
 		"",
 		"",
@@ -104,7 +111,7 @@ Background.prototype.goToCredit = function() {
 Background.prototype.drawToContext = function(theContext) {
 	// Credits
 	if (this.isRunningCredit) {
-		if (this.creditCountup < 1910) {
+		if (this.creditCountup < 2090) {
 			this.creditCountup++;
 		}
 		theContext.fillStyle = "rgba(0, 0, 0, 1)";

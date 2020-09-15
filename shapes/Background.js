@@ -31,11 +31,6 @@ function Background(player, canvasWidth, canvasHeight, imageManager, soundManage
 		"(in arphabatical order)",
 		"",
 		"",
-		"+Art Lead+",
-		"",
-		"Jasmine Lin",
-		"",
-		"",
 		"+Test Player+",
 		"",
 		"Ariel Kuo",
@@ -44,6 +39,17 @@ function Background(player, canvasWidth, canvasHeight, imageManager, soundManage
 		"Henry Ong",
 		"Jasmine Lin",
 		"Sandy Hsiao",
+		"",
+		"",
+		"+Art Lead+",
+		"",
+		"Jasmine Lin",
+		"",
+		"",
+		"+Guitar+",
+		"",
+		"David Su",
+		"Eric Clapton",
 		"",
 		"",
 		"+Puzzle Designer+",
@@ -90,7 +96,7 @@ Background.prototype.goToCredit = function() {
 Background.prototype.drawToContext = function(theContext) {
 	// Credits
 	if (this.isRunningCredit) {
-		if (this.creditCountup < 1600) {
+		if (this.creditCountup < 1905) {
 			this.creditCountup++;
 		}
 		theContext.fillStyle = "rgba(0, 0, 0, 1)";

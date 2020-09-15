@@ -22,7 +22,7 @@ LetterItem.prototype.getItemDescription = function() {
 	description["0"] = ""
 	description["1"] = "2020/9/15";
 	description["2"] = "";
-	description["3"] = "It most be an important date.";
+	description["3"] = "It must be an important date.";
 	description["4"] = "";
 	return description;
 }

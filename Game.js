@@ -1,14 +1,12 @@
 function Game(){}
 
 // TODO:
-// - Make Cocaine item
-// - Ending cut
+// - Ending cut song
+// - Credit song
 // - remove test code before upload
 
 // Option
-// - sfx
 // - Hover hint image?
-// - SB holder hint?
 // - item info
 
 

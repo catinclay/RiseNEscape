@@ -75,7 +75,7 @@ function Background(player, canvasWidth, canvasHeight, imageManager, soundManage
 		"",
 		"",
 		"",
-		"",
+		"June, and...",
 		"",
 		"",
 		"+Birthdayer+",

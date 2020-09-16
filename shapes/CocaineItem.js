@@ -18,7 +18,7 @@ CocaineItem.prototype.getItemTag = function() {
 
 CocaineItem.prototype.getItemDescription = function() {
 	let description = {};
-	description["itemName"] = "C*****n";
+	description["itemName"] = "Cc***ne";
 	description["0"] = ""
 	description["1"] = "";
 	description["2"] = "shhh..";

@@ -18,8 +18,8 @@ GoggleItem.prototype.getItemTag = function() {
 
 GoggleItem.prototype.getItemDescription = function() {
 	let description = {};
-	description["itemName"] = "Google";
-	description["0"] = "Beautiful google"
+	description["itemName"] = "Goggle";
+	description["0"] = "Beautiful goggle"
 	description["1"] = "hmm..";
 	description["2"] = "";
 	description["3"] = "Have I seen this somewhere before?";
